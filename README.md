@@ -1,13 +1,13 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # ⚡ SolPrep
 
 ### Senior Solana Smart Contract Developer Interview Preparation Platform
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_SolPrep-6366F1?style=for-the-badge)](https://upendra-eth.github.io/solprep/)
-[![GitHub Stars](https://img.shields.io/github/stars/upendra-eth/solprep?style=for-the-badge&color=F59E0B)](https://github.com/upendra-eth/solprep/stargazers)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_SolPrep-6366F1?style=for-the-badge)](https://upendra-eth.github.io/sol-prep/)
+[![GitHub Stars](https://img.shields.io/github/stars/upendra-eth/sol-prep?style=for-the-badge&color=F59E0B)](https://github.com/upendra-eth/sol-prep/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-14F195?style=for-the-badge)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-EC4899?style=for-the-badge)](CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-EC4899?style=for-the-badge)](https://github.com/upendra-eth/sol-prep/pulls)
 
 <br />
 
@@ -17,7 +17,7 @@ A free, open-source, zero-dependency platform to prepare for senior-level Solana
 
 <br />
 
-[**🚀 Launch SolPrep →**](https://upendra-eth.github.io/solprep/)
+[**🚀 Launch SolPrep →**](https://upendra-eth.github.io/sol-prep/)
 
 <br />
 
@@ -99,13 +99,13 @@ Each includes: account hierarchy, key challenges, and interview talking points.
 ## 🚀 Quick Start
 
 ### Option 1: Use Online (Recommended)
-Just visit: **[https://upendra-eth.github.io/solprep/](https://upendra-eth.github.io/solprep/)**
+Just visit: **[https://upendra-eth.github.io/sol-prep/](https://upendra-eth.github.io/sol-prep/)**
 
 ### Option 2: Run Locally
 ```bash
 # Clone the repo
-git clone https://github.com/upendra-eth/solprep.git
-cd solprep
+git clone https://github.com/upendra-eth/sol-prep.git
+cd sol-prep
 
 # Open in browser (no build step needed!)
 open index.html        # macOS
@@ -120,7 +120,7 @@ That's it. **No npm, no node, no dependencies.** Just a browser.
 ## 🏗️ Architecture
 
 ```
-solprep/
+sol-prep/
 ├── index.html     # HTML shell + full CSS design system
 ├── data.js        # All content (modules, questions, challenges, flashcards)
 ├── app.js         # SPA engine (routing, state, rendering)
@@ -162,8 +162,8 @@ solprep/
 
 ```bash
 # Fork → Clone → Branch → Code → Push → PR
-git clone https://github.com/YOUR_USERNAME/solprep.git
-cd solprep
+git clone https://github.com/YOUR_USERNAME/sol-prep.git
+cd sol-prep
 git checkout -b feature/your-feature-name
 # Make your changes...
 git commit -m "feat: add new security question about token-2022"
@@ -213,7 +213,6 @@ This project is open source under the [MIT License](LICENSE). Use it, modify it,
 
 **Built with ⚡ by [Upendra](https://github.com/upendra-eth)**
 
-If you found this helpful, drop a ⭐ on [GitHub](https://github.com/upendra-eth/solprep)
+If you found this helpful, drop a ⭐ on [GitHub](https://github.com/upendra-eth/sol-prep)
 
 </div>
-]]>
