@@ -1,0 +1,1878 @@
+\<\!DOCTYPE html\>  
+\<html lang="en"\>  
+\<head\>  
+\<meta charset="UTF-8"\>  
+\<meta name="viewport" content="width=device-width, initial-scale=1.0"\>  
+\<title\>Senior Solana Smart Contract Developer — Interview Preparation Guide\</title\>  
+\<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700\&family=Sora:wght@300;400;600;700;800\&display=swap" rel="stylesheet"\>  
+\<style\>  
+:root {  
+  \--bg: \#0a0e1a;  
+  \--bg2: \#0f1526;  
+  \--bg3: \#141b31;  
+  \--card: \#161e35;  
+  \--card2: \#1a2240;  
+  \--border: \#1f2d50;  
+  \--border2: \#2a3d6b;  
+  \--sol: \#9945FF;  
+  \--sol2: \#14F195;  
+  \--sol3: \#00C2FF;  
+  \--accent: \#FB7185;  
+  \--amber: \#FCD34D;  
+  \--text: \#e2e8f7;  
+  \--text2: \#8fa3cc;  
+  \--text3: \#5a729a;  
+  \--code-bg: \#0c1220;  
+  \--mono: 'Space Mono', monospace;  
+  \--sans: 'Sora', sans-serif;  
+}
+
+\* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {  
+  background: var(--bg);  
+  color: var(--text);  
+  font-family: var(--sans);  
+  font-size: 15px;  
+  line-height: 1.7;  
+  overflow-x: hidden;  
+}
+
+/\* ── HERO ─────────────────────────────── \*/  
+.hero {  
+  position: relative;  
+  padding: 80px 40px 60px;  
+  text-align: center;  
+  overflow: hidden;  
+  background: radial-gradient(ellipse 80% 60% at 50% \-10%, \#1a0a33 0%, transparent 70%),  
+              radial-gradient(ellipse 60% 40% at 80% 50%, \#001a28 0%, transparent 60%),  
+              var(--bg);  
+}  
+.hero::before {  
+  content: '';  
+  position: absolute; inset: 0;  
+  background-image:   
+    linear-gradient(rgba(153,69,255,.07) 1px, transparent 1px),  
+    linear-gradient(90deg, rgba(153,69,255,.07) 1px, transparent 1px);  
+  background-size: 40px 40px;  
+  mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, black 40%, transparent 100%);  
+}  
+.hero-badge {  
+  display: inline-block;  
+  font-family: var(--mono);  
+  font-size: 11px;  
+  letter-spacing: .15em;  
+  color: var(--sol2);  
+  background: rgba(20,241,149,.08);  
+  border: 1px solid rgba(20,241,149,.2);  
+  border-radius: 20px;  
+  padding: 5px 16px;  
+  margin-bottom: 24px;  
+  text-transform: uppercase;  
+}  
+.hero h1 {  
+  font-size: clamp(2rem, 5vw, 3.6rem);  
+  font-weight: 800;  
+  line-height: 1.1;  
+  letter-spacing: \-.03em;  
+  margin-bottom: 20px;  
+}  
+.hero h1 span {  
+  background: linear-gradient(135deg, var(--sol) 0%, var(--sol3) 50%, var(--sol2) 100%);  
+  \-webkit-background-clip: text;  
+  \-webkit-text-fill-color: transparent;  
+  background-clip: text;  
+}  
+.hero-sub {  
+  font-size: 1.05rem;  
+  color: var(--text2);  
+  max-width: 600px;  
+  margin: 0 auto 40px;  
+  font-weight: 300;  
+}  
+.hero-stats {  
+  display: flex;  
+  justify-content: center;  
+  gap: 40px;  
+  flex-wrap: wrap;  
+}  
+.stat {  
+  text-align: center;  
+}  
+.stat-num {  
+  font-family: var(--mono);  
+  font-size: 1.8rem;  
+  font-weight: 700;  
+  color: var(--sol2);  
+  display: block;  
+}  
+.stat-label {  
+  font-size: .75rem;  
+  color: var(--text3);  
+  text-transform: uppercase;  
+  letter-spacing: .1em;  
+}
+
+/\* ── LAYOUT ───────────────────────────── \*/  
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }  
+.toc-nav {  
+  position: sticky;  
+  top: 0;  
+  z-index: 100;  
+  background: rgba(10,14,26,.92);  
+  backdrop-filter: blur(12px);  
+  border-bottom: 1px solid var(--border);  
+  padding: 12px 24px;  
+  overflow-x: auto;  
+  white-space: nowrap;  
+}  
+.toc-nav a {  
+  font-family: var(--mono);  
+  font-size: 11px;  
+  color: var(--text3);  
+  text-decoration: none;  
+  margin-right: 24px;  
+  text-transform: uppercase;  
+  letter-spacing: .1em;  
+  transition: color .2s;  
+}  
+.toc-nav a:hover { color: var(--sol2); }
+
+/\* ── SECTION ──────────────────────────── \*/  
+.section {  
+  padding: 64px 0;  
+  border-bottom: 1px solid var(--border);  
+}  
+.section-header {  
+  display: flex;  
+  align-items: flex-start;  
+  gap: 20px;  
+  margin-bottom: 40px;  
+}  
+.section-num {  
+  font-family: var(--mono);  
+  font-size: .75rem;  
+  color: var(--sol);  
+  background: rgba(153,69,255,.1);  
+  border: 1px solid rgba(153,69,255,.2);  
+  border-radius: 6px;  
+  padding: 4px 10px;  
+  flex-shrink: 0;  
+  margin-top: 6px;  
+}  
+.section-title {  
+  font-size: 1.8rem;  
+  font-weight: 800;  
+  letter-spacing: \-.02em;  
+  line-height: 1.2;  
+}  
+.section-desc {  
+  color: var(--text2);  
+  margin-top: 8px;  
+  font-size: .95rem;  
+}
+
+/\* ── CATEGORY TABS ────────────────────── \*/  
+.cat-tabs {  
+  display: flex;  
+  gap: 8px;  
+  flex-wrap: wrap;  
+  margin-bottom: 28px;  
+}  
+.cat-tab {  
+  font-family: var(--mono);  
+  font-size: 11px;  
+  padding: 6px 14px;  
+  border-radius: 20px;  
+  border: 1px solid var(--border2);  
+  color: var(--text2);  
+  background: transparent;  
+  cursor: pointer;  
+  transition: all .2s;  
+  text-transform: uppercase;  
+  letter-spacing: .08em;  
+}  
+.cat-tab.active, .cat-tab:hover {  
+  background: var(--sol);  
+  border-color: var(--sol);  
+  color: \#fff;  
+}
+
+/\* ── Q\&A CARD ─────────────────────────── \*/  
+.qa-grid { display: flex; flex-direction: column; gap: 16px; }  
+.qa-card {  
+  background: var(--card);  
+  border: 1px solid var(--border);  
+  border-radius: 12px;  
+  overflow: hidden;  
+  transition: border-color .2s, box-shadow .2s;  
+}  
+.qa-card:hover {  
+  border-color: var(--border2);  
+  box-shadow: 0 4px 20px rgba(153,69,255,.08);  
+}  
+.qa-q {  
+  padding: 18px 24px;  
+  cursor: pointer;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: flex-start;  
+  gap: 16px;  
+  user-select: none;  
+}  
+.qa-q-text {  
+  font-weight: 600;  
+  font-size: .95rem;  
+  flex: 1;  
+}  
+.qa-diff {  
+  font-family: var(--mono);  
+  font-size: 10px;  
+  padding: 3px 8px;  
+  border-radius: 4px;  
+  flex-shrink: 0;  
+  text-transform: uppercase;  
+  letter-spacing: .08em;  
+}  
+.diff-core   { background: rgba(20,241,149,.1); color: var(--sol2); border: 1px solid rgba(20,241,149,.2); }  
+.diff-mid    { background: rgba(0,194,255,.1); color: var(--sol3); border: 1px solid rgba(0,194,255,.2); }  
+.diff-senior { background: rgba(153,69,255,.12); color: var(--sol); border: 1px solid rgba(153,69,255,.25); }  
+.diff-expert { background: rgba(251,113,133,.1); color: var(--accent); border: 1px solid rgba(251,113,133,.2); }
+
+.qa-toggle { color: var(--text3); transition: transform .3s; flex-shrink: 0; font-size: 1.1rem; }  
+.qa-card.open .qa-toggle { transform: rotate(180deg); }  
+.qa-a {  
+  display: none;  
+  padding: 0 24px 24px;  
+  border-top: 1px solid var(--border);  
+  padding-top: 20px;  
+}  
+.qa-card.open .qa-a { display: block; }  
+.qa-a p { color: var(--text2); margin-bottom: 12px; font-size: .92rem; }  
+.qa-a ul { color: var(--text2); padding-left: 20px; margin-bottom: 12px; font-size: .92rem; }  
+.qa-a li { margin-bottom: 6px; }  
+.qa-a strong { color: var(--text); }
+
+/\* ── CODE BLOCK ───────────────────────── \*/  
+pre {  
+  background: var(--code-bg);  
+  border: 1px solid var(--border);  
+  border-left: 3px solid var(--sol);  
+  border-radius: 8px;  
+  padding: 18px 20px;  
+  overflow-x: auto;  
+  font-family: var(--mono);  
+  font-size: .8rem;  
+  line-height: 1.7;  
+  color: \#a8c4e8;  
+  margin: 14px 0;  
+}  
+code { font-family: var(--mono); }  
+.inline-code {  
+  background: rgba(153,69,255,.12);  
+  color: var(--sol);  
+  padding: 2px 6px;  
+  border-radius: 4px;  
+  font-family: var(--mono);  
+  font-size: .83em;  
+}
+
+/\* ── GRID CARDS ───────────────────────── \*/  
+.card-grid {  
+  display: grid;  
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
+  gap: 16px;  
+  margin-top: 8px;  
+}  
+.info-card {  
+  background: var(--card);  
+  border: 1px solid var(--border);  
+  border-radius: 12px;  
+  padding: 22px;  
+  transition: border-color .2s;  
+}  
+.info-card:hover { border-color: var(--border2); }  
+.info-card-icon { font-size: 1.8rem; margin-bottom: 12px; }  
+.info-card h4 { font-weight: 700; margin-bottom: 8px; font-size: 1rem; }  
+.info-card p, .info-card li { color: var(--text2); font-size: .88rem; line-height: 1.6; }  
+.info-card ul { padding-left: 18px; }  
+.info-card li { margin-bottom: 5px; }
+
+/\* ── HIGHLIGHT CARDS ──────────────────── \*/  
+.highlight-card {  
+  background: linear-gradient(135deg, rgba(153,69,255,.08) 0%, rgba(20,241,149,.04) 100%);  
+  border: 1px solid rgba(153,69,255,.2);  
+  border-radius: 12px;  
+  padding: 22px;  
+  margin: 16px 0;  
+}  
+.highlight-card h4 { color: var(--sol2); margin-bottom: 10px; font-size: .95rem; }  
+.highlight-card p, .highlight-card li { color: var(--text2); font-size: .88rem; }  
+.highlight-card ul { padding-left: 18px; }  
+.highlight-card li { margin-bottom: 5px; }
+
+/\* ── ROADMAP ──────────────────────────── \*/  
+.roadmap { display: flex; flex-direction: column; gap: 0; }  
+.roadmap-week {  
+  display: flex;  
+  gap: 24px;  
+  position: relative;  
+  padding-bottom: 32px;  
+}  
+.roadmap-week::before {  
+  content: '';  
+  position: absolute;  
+  left: 24px;  
+  top: 50px;  
+  bottom: 0;  
+  width: 1px;  
+  background: var(--border);  
+}  
+.roadmap-week:last-child::before { display: none; }  
+.week-num {  
+  width: 50px;  
+  height: 50px;  
+  border-radius: 50%;  
+  background: linear-gradient(135deg, var(--sol), var(--sol3));  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-family: var(--mono);  
+  font-weight: 700;  
+  font-size: .9rem;  
+  flex-shrink: 0;  
+  position: relative;  
+  z-index: 1;  
+}  
+.week-content {  
+  background: var(--card);  
+  border: 1px solid var(--border);  
+  border-radius: 12px;  
+  padding: 20px 24px;  
+  flex: 1;  
+}  
+.week-title { font-weight: 700; margin-bottom: 4px; }  
+.week-sub { color: var(--text2); font-size: .85rem; margin-bottom: 12px; }  
+.week-tasks { display: flex; flex-wrap: wrap; gap: 8px; }  
+.task-tag {  
+  font-size: .78rem;  
+  padding: 4px 10px;  
+  border-radius: 20px;  
+  background: rgba(255,255,255,.04);  
+  border: 1px solid var(--border2);  
+  color: var(--text2);  
+}
+
+/\* ── RESOURCES ────────────────────────── \*/  
+.resource-list { display: flex; flex-direction: column; gap: 10px; }  
+.resource-item {  
+  background: var(--card);  
+  border: 1px solid var(--border);  
+  border-radius: 10px;  
+  padding: 16px 20px;  
+  display: flex;  
+  align-items: flex-start;  
+  gap: 14px;  
+}  
+.resource-icon {  
+  width: 36px;  
+  height: 36px;  
+  border-radius: 8px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-size: 1.1rem;  
+  flex-shrink: 0;  
+}  
+.res-type-doc { background: rgba(20,241,149,.1); }  
+.res-type-vid { background: rgba(251,113,133,.1); }  
+.res-type-repo { background: rgba(153,69,255,.1); }  
+.res-type-course { background: rgba(252,211,77,.1); }  
+.resource-info h5 { font-weight: 600; font-size: .9rem; margin-bottom: 3px; }  
+.resource-info p { color: var(--text2); font-size: .82rem; }
+
+/\* ── INTERVIEW PROCESS ────────────────── \*/  
+.process-steps {  
+  display: flex;  
+  gap: 0;  
+  margin: 24px 0;  
+  overflow-x: auto;  
+  padding-bottom: 8px;  
+}  
+.process-step {  
+  flex: 1;  
+  min-width: 150px;  
+  text-align: center;  
+  position: relative;  
+}  
+.process-step::after {  
+  content: '→';  
+  position: absolute;  
+  right: \-8px;  
+  top: 24px;  
+  color: var(--text3);  
+  font-size: 1.2rem;  
+}  
+.process-step:last-child::after { display: none; }  
+.step-circle {  
+  width: 48px;  
+  height: 48px;  
+  border-radius: 50%;  
+  margin: 0 auto 10px;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  font-size: 1.3rem;  
+  border: 2px solid var(--border2);  
+  background: var(--card);  
+}  
+.step-label { font-size: .78rem; font-weight: 600; margin-bottom: 4px; }  
+.step-desc { font-size: .72rem; color: var(--text3); }
+
+/\* ── BADGE ────────────────────────────── \*/  
+.badge {  
+  display: inline-flex;  
+  align-items: center;  
+  gap: 6px;  
+  font-family: var(--mono);  
+  font-size: 10px;  
+  padding: 3px 10px;  
+  border-radius: 20px;  
+  text-transform: uppercase;  
+  letter-spacing: .08em;  
+  margin-bottom: 8px;  
+}  
+.badge-purple { background: rgba(153,69,255,.12); color: var(--sol); border: 1px solid rgba(153,69,255,.25); }  
+.badge-green  { background: rgba(20,241,149,.1); color: var(--sol2); border: 1px solid rgba(20,241,149,.2); }  
+.badge-blue   { background: rgba(0,194,255,.1); color: var(--sol3); border: 1px solid rgba(0,194,255,.2); }  
+.badge-red    { background: rgba(251,113,133,.1); color: var(--accent); border: 1px solid rgba(251,113,133,.2); }
+
+/\* ── TABLE ────────────────────────────── \*/  
+.table-wrap { overflow-x: auto; margin: 16px 0; }  
+table { width: 100%; border-collapse: collapse; font-size: .87rem; }  
+th {  
+  background: var(--card2);  
+  padding: 12px 16px;  
+  text-align: left;  
+  font-family: var(--mono);  
+  font-size: .75rem;  
+  text-transform: uppercase;  
+  letter-spacing: .08em;  
+  color: var(--text2);  
+  border-bottom: 1px solid var(--border2);  
+}  
+td {  
+  padding: 11px 16px;  
+  border-bottom: 1px solid var(--border);  
+  color: var(--text2);  
+  vertical-align: top;  
+}  
+tr:hover td { background: rgba(255,255,255,.015); }  
+td:first-child { color: var(--text); font-weight: 500; }
+
+/\* ── DIVIDER ──────────────────────────── \*/  
+.divider {  
+  width: 100%;  
+  height: 1px;  
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);  
+  margin: 12px 0;  
+}
+
+/\* ── FOOTER ───────────────────────────── \*/  
+footer {  
+  text-align: center;  
+  padding: 40px;  
+  color: var(--text3);  
+  font-size: .78rem;  
+  font-family: var(--mono);  
+  border-top: 1px solid var(--border);  
+}
+
+/\* ── UTILS ────────────────────────────── \*/  
+.mt-16 { margin-top: 16px; }  
+.mt-24 { margin-top: 24px; }  
+.cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }  
+@media(max-width: 700px) { .cols-2 { grid-template-columns: 1fr; } .hero { padding: 50px 20px 40px; } }  
+\</style\>  
+\</head\>  
+\<body\>
+
+\<\!-- HERO \--\>  
+\<div class="hero"\>  
+  \<div class="hero-badge"\>🧑‍💻 Complete Preparation Guide · 2025 Edition\</div\>  
+  \<h1\>Senior Solana Smart Contract\<br\>\<span\>Developer Interview\</span\>\</h1\>  
+  \<p class="hero-sub"\>A comprehensive, research-backed guide covering questions, architecture, security, system design, coding challenges, and a structured roadmap to land your senior role.\</p\>  
+  \<div class="hero-stats"\>  
+    \<div class="stat"\>\<span class="stat-num"\>7\</span\>\<span class="stat-label"\>Core Sections\</span\>\</div\>  
+    \<div class="stat"\>\<span class="stat-num"\>60+\</span\>\<span class="stat-label"\>Interview Questions\</span\>\</div\>  
+    \<div class="stat"\>\<span class="stat-num"\>4 Wk\</span\>\<span class="stat-label"\>Study Roadmap\</span\>\</div\>  
+    \<div class="stat"\>\<span class="stat-num"\>30+\</span\>\<span class="stat-num2"\>Curated Resources\</span\>\</div\>  
+  \</div\>  
+\</div\>
+
+\<\!-- NAV \--\>  
+\<nav class="toc-nav"\>  
+  \<a href="\#s1"\>Interview Questions\</a\>  
+  \<a href="\#s2"\>Interview Process\</a\>  
+  \<a href="\#s3"\>Coding Challenges\</a\>  
+  \<a href="\#s4"\>Project Portfolio\</a\>  
+  \<a href="\#s5"\>Advanced Topics\</a\>  
+  \<a href="\#s6"\>Study Roadmap\</a\>  
+  \<a href="\#s7"\>Resources\</a\>  
+\</nav\>
+
+\<div class="container"\>
+
+\<\!-- ═══ SECTION 1: INTERVIEW QUESTIONS ═══ \--\>  
+\<section class="section" id="s1"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>01\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>Interview Questions & Answers\</h2\>  
+      \<p class="section-desc"\>Organized by category. Click any question to reveal the answer.\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<\!-- 1A: Solana Fundamentals \--\>  
+  \<div class="badge badge-green"\>⚡ Category A\</div\>  
+  \<h3 style="font-size:1.2rem; margin-bottom:16px;"\>Solana Fundamentals — Runtime, Accounts, Transactions\</h3\>  
+  \<div class="qa-grid"\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Explain Proof of History (PoH) and how it enables Solana's performance.\</span\>  
+        \<span class="qa-diff diff-core"\>Core\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>\<strong\>PoH is a cryptographic clock built on a Verifiable Delay Function (VDF).\</strong\> It creates a historical record proving that events occurred at specific points in time, without requiring validators to synchronize clocks externally.\</p\>  
+        \<p\>Each hash output becomes the input for the next — creating a sequential, verifiable chain. Because VDFs are inherently sequential and cannot be parallelized, the output provably took a certain number of CPU cycles to compute.\</p\>  
+        \<p\>\<strong\>Why this matters for performance:\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>Eliminates inter-validator clock-sync messages, drastically reducing network communication overhead.\</li\>  
+          \<li\>Tower BFT can leverage PoH timestamps to finalize consensus faster with fewer rounds of voting.\</li\>  
+          \<li\>Validators don't need to agree on time; they trust the VDF chain — enabling sub-second block times (\~400ms slots).\</li\>  
+        \</ul\>  
+        \<pre\>// PoH conceptual model (simplified)  
+let hash \= sha256(prev\_hash \+ counter);  
+// Each iteration is one "tick" — provably sequential  
+// The count encodes elapsed time in CPU cycles\</pre\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Describe Solana's account model. How does it differ from Ethereum's contract model?\</span\>  
+        \<span class="qa-diff diff-core"\>Core\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>In Solana, \<strong\>everything is an account\</strong\>. Unlike Ethereum where contract storage lives inside the contract, Solana separates \<em\>code\</em\> from \<em\>state\</em\>:\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Program accounts\</strong\> — store executable bytecode (immutable once deployed without upgrade authority).\</li\>  
+          \<li\>\<strong\>Data accounts\</strong\> — store state (owned by a program, can be written by that program only).\</li\>  
+          \<li\>\<strong\>Wallet accounts\</strong\> — hold SOL, owned by the System Program.\</li\>  
+          \<li\>\<strong\>Token accounts\</strong\> — store token balances, owned by the SPL Token Program.\</li\>  
+        \</ul\>  
+        \<p\>Key differences vs Ethereum:\</p\>  
+        \<div class="table-wrap"\>  
+          \<table\>  
+            \<tr\>\<th\>Feature\</th\>\<th\>Solana\</th\>\<th\>Ethereum\</th\>\</tr\>  
+            \<tr\>\<td\>State storage\</td\>\<td\>Separate data accounts\</td\>\<td\>Inside contract storage\</td\>\</tr\>  
+            \<tr\>\<td\>Code mutability\</td\>\<td\>Upgradeable (with authority)\</td\>\<td\>Immutable (proxy pattern needed)\</td\>\</tr\>  
+            \<tr\>\<td\>Gas / Fee model\</td\>\<td\>Compute Units (CUs)\</td\>\<td\>Gas (EIP-1559)\</td\>\</tr\>  
+            \<tr\>\<td\>Parallelism\</td\>\<td\>Sealevel — explicit read/write sets\</td\>\<td\>Single-threaded EVM\</td\>\</tr\>  
+            \<tr\>\<td\>Rent\</td\>\<td\>Accounts require rent-exempt SOL deposit\</td\>\<td\>Storage costs are gas-based\</td\>\</tr\>  
+          \</table\>  
+        \</div\>  
+        \<p\>This separation is what enables Sealevel's parallel execution — transactions declare which accounts they access, so non-conflicting transactions run concurrently across multiple cores.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What is a Program Derived Address (PDA)? When and why would you use one?\</span\>  
+        \<span class="qa-diff diff-mid"\>Mid\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>A \<strong\>PDA\</strong\> is a deterministic account address derived from a program ID and seeds, but it does \<em\>not\</em\> lie on the ed25519 elliptic curve — meaning no private key can sign for it. Only the program itself can sign via \<code class="inline-code"\>invoke\_signed()\</code\>.\</p\>  
+        \<p\>\<strong\>Why use PDAs?\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Program-controlled accounts\</strong\> — the program is the sole authority, enabling trustless escrow, vaults, and liquidity pools.\</li\>  
+          \<li\>\<strong\>Deterministic addressing\</strong\> — any client can re-derive the address from seeds without storing it.\</li\>  
+          \<li\>\<strong\>Namespacing\</strong\> — using seeds like \<code class="inline-code"\>\[b"user", user\_pubkey\]\</code\> creates per-user accounts that cannot collide.\</li\>  
+        \</ul\>  
+\<pre\>// Deriving a PDA  
+let (pda, bump) \= Pubkey::find\_program\_address(  
+    &\[b"vault", user.key().as\_ref()\],  
+    program\_id,  
+);
+
+// In Anchor — even cleaner:  
+\#\[account(  
+    init,  
+    payer \= user,  
+    space \= 8 \+ Vault::LEN,  
+    seeds \= \[b"vault", user.key().as\_ref()\],  
+    bump  
+)\]  
+pub vault: Account\<'info, Vault\>,\</pre\>  
+        \<p\>\<strong\>Common use-cases:\</strong\> token vaults, escrow accounts, stake pools, DAO treasuries, user profile accounts, and any account that a program — not a user — must own and control.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How does Sealevel enable parallel transaction execution? What are its constraints?\</span\>  
+        \<span class="qa-diff diff-senior"\>Senior\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Sealevel is Solana's parallel smart-contract runtime. Every transaction must \<strong\>declare all accounts it will read and write\</strong\> before execution. The scheduler then:\</p\>  
+        \<ul\>  
+          \<li\>Groups transactions by their read/write account sets.\</li\>  
+          \<li\>Executes transactions touching disjoint accounts concurrently across CPU cores (and even GPU threads via SIMD optimizations).\</li\>  
+          \<li\>Serializes only transactions that share a writable account (lock contention).\</li\>  
+        \</ul\>  
+        \<p\>An additional optimization: Sealevel sorts transactions by program ID and runs the same program over multiple independent accounts in parallel — leveraging CPU SIMD instructions for further throughput gains.\</p\>  
+        \<p\>\<strong\>Design constraints / implications for developers:\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>Hot accounts (e.g., a single AMM pool) become throughput bottlenecks when many transactions write to them simultaneously.\</li\>  
+          \<li\>You must declare all accounts upfront — dynamic account discovery during execution isn't possible (unlike EVM).\</li\>  
+          \<li\>To maximize parallelism, split large shared state into many smaller accounts (e.g., per-user accounts rather than one global account).\</li\>  
+          \<li\>Cross-program invocations (CPI) that write to accounts block parallel execution on those accounts.\</li\>  
+        \</ul\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Explain rent exemption in Solana. What happens to accounts that fall below the threshold?\</span\>  
+        \<span class="qa-diff diff-core"\>Core\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Accounts on Solana must hold a minimum SOL balance proportional to their data size to be \<strong\>rent-exempt\</strong\>. This prevents unbounded state growth by making state storage economically sustainable.\</p\>  
+        \<ul\>  
+          \<li\>The current threshold is roughly \<strong\>\~0.00203 SOL per 128 bytes\</strong\> of account data.\</li\>  
+          \<li\>Accounts below this threshold are subject to periodic rent deduction. If a balance hits zero, the account is purged by the garbage collector.\</li\>  
+          \<li\>Best practice: always initialize accounts with enough SOL to be rent-exempt from the start.\</li\>  
+          \<li\>When closing an account, \<strong\>return all lamports\</strong\> to the payer and zero the data — failure to do so is a security vulnerability (account resurrection attack).\</li\>  
+        \</ul\>  
+        \<pre\>// Closing an account properly in Anchor  
+\#\[account(  
+    mut,  
+    close \= user  // transfers lamports to user, zeroes data  
+)\]  
+pub data\_account: Account\<'info, MyData\>,\</pre\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What is Gulf Stream and how does it reduce confirmation latency?\</span\>  
+        \<span class="qa-diff diff-mid"\>Mid\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>\<strong\>Gulf Stream\</strong\> is Solana's mempool-less transaction forwarding protocol. Because Solana's leader schedule is known in advance (via PoH), clients and validators can \<strong\>forward transactions directly to the upcoming leader\</strong\> rather than broadcasting to the entire network.\</p\>  
+        \<p\>\<strong\>Benefits:\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>Validators can pre-process and cache transactions before their slot begins — reducing slot time.\</li\>  
+          \<li\>No mempool means no mempool-based front-running (though searchers use Jito bundles for MEV).\</li\>  
+          \<li\>Reduces the number of unconfirmed transactions held in memory across the network.\</li\>  
+          \<li\>Enables the low-latency confirmation (typically \~400ms for optimistic confirmation, \~13s for full finality) that Solana is known for.\</li\>  
+        \</ul\>  
+        \<p\>\<strong\>Downside:\</strong\> If you send a transaction to the wrong leader or a leader is skipped, your transaction may expire — you should use durable nonces or retry with fresh blockhashes for critical flows.\</p\>  
+      \</div\>  
+    \</div\>
+
+  \</div\>\<\!-- end qa-grid \--\>
+
+  \<div class="divider"\>\</div\>
+
+  \<\!-- 1B: Rust \--\>  
+  \<div class="badge badge-purple mt-24"\>⚙️ Category B\</div\>  
+  \<h3 style="font-size:1.2rem; margin-bottom:16px;"\>Rust Programming — Ownership, Lifetimes, Concurrency\</h3\>  
+  \<div class="qa-grid"\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Explain Rust's ownership model. Why is it particularly well-suited for Solana program development?\</span\>  
+        \<span class="qa-diff diff-core"\>Core\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Rust enforces three ownership rules at \<strong\>compile time\</strong\>:\</p\>  
+        \<ul\>  
+          \<li\>Every value has exactly one owner at any time.\</li\>  
+          \<li\>When the owner goes out of scope, the value is dropped (no GC needed).\</li\>  
+          \<li\>Borrowing (references) allows temporary access without transferring ownership.\</li\>  
+        \</ul\>  
+        \<p\>\<strong\>Why it matters for Solana:\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>No garbage collector\</strong\> — GC pauses would be catastrophic for a blockchain runtime targeting \~400ms slots.\</li\>  
+          \<li\>\<strong\>Zero-cost abstractions\</strong\> — high-level code compiles to the same machine instructions as hand-optimized C.\</li\>  
+          \<li\>\<strong\>Memory safety without a VM\</strong\> — eliminates buffer overflows, use-after-free, and null pointer dereferences at compile time. Microsoft estimates these account for \~70% of CVEs in C/C++ codebases.\</li\>  
+          \<li\>\<strong\>Fearless concurrency\</strong\> — the borrow checker prevents data races, enabling Sealevel's parallel execution model.\</li\>  
+        \</ul\>  
+        \<pre\>// Single owner — s2 gets ownership, s1 invalid  
+let s1 \= String::from("solana");  
+let s2 \= s1; // s1 moved; using s1 here \= compile error
+
+// Borrowing — no transfer  
+fn print\_len(s: \&String) {  
+    println\!("{}", s.len()); // just borrows  
+}  
+let s3 \= String::from("anchor");  
+print\_len(\&s3); // s3 still valid here\</pre\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What are lifetimes in Rust? Describe a scenario in Solana program code where they become critical.\</span\>  
+        \<span class="qa-diff diff-mid"\>Mid\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>\<strong\>Lifetimes\</strong\> are Rust's way of tracking how long references remain valid, preventing dangling references at compile time. They're denoted with \<code class="inline-code"\>'a\</code\> syntax.\</p\>  
+        \<pre\>// Function returning a reference — requires lifetime annotation  
+fn longest\<'a\>(x: &'a str, y: &'a str) \-\> &'a str {  
+    if x.len() \> y.len() { x } else { y }  
+}  
+// The returned reference lives at most as long as  
+// the shorter of x and y\</pre\>  
+        \<p\>\<strong\>In Solana context — the \<code class="inline-code"\>AccountInfo\</code\> struct:\</strong\>\</p\>  
+        \<pre\>// AccountInfo borrows from the transaction context  
+// Its lifetime 'info must not outlive the transaction  
+pub struct AccountInfo\<'info\> {  
+    pub key: &'info Pubkey,  
+    pub lamports: Rc\<RefCell\<&'info mut u64\>\>,  
+    pub data: Rc\<RefCell\<&'info mut \[u8\]\>\>,  
+    pub owner: &'info Pubkey,  
+    // ...  
+}
+
+// Anchor's Context struct ties all account lifetimes together  
+pub struct Context\<'a, 'b, 'c, 'info, T\> {  
+    pub accounts: &'b mut T,  
+    pub remaining\_accounts: &'c \[AccountInfo\<'info\>\],  
+    // ...  
+}\</pre\>  
+        \<p\>If you attempt to hold a reference to an account's data beyond the instruction's scope, the compiler will reject it — preventing a whole class of bugs where stale account data could be used after the execution context is gone.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How does Rust prevent data races, and how does this relate to how Solana programs handle concurrency?\</span\>  
+        \<span class="qa-diff diff-senior"\>Senior\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Rust's borrow checker enforces that at any given time, for any piece of data, you can have \<strong\>either many immutable references OR one mutable reference — never both\</strong\>. This is checked at compile time, eliminating data races without needing mutexes for most use cases.\</p\>  
+        \<p\>In Solana's BPF runtime, programs execute single-threaded \<em\>within\</em\> a transaction, but the Sealevel runtime runs multiple transactions \<em\>across\</em\> threads. The account locking mechanism mirrors Rust's borrow rules at the runtime level:\</p\>  
+        \<ul\>  
+          \<li\>Multiple transactions can \<strong\>read\</strong\> the same account concurrently.\</li\>  
+          \<li\>Only one transaction can \<strong\>write\</strong\> to an account at a time (exclusive write lock).\</li\>  
+        \</ul\>  
+        \<p\>For sharing state across instructions within a program, Solana uses \<code class="inline-code"\>Rc\&lt;RefCell\&lt;T\&gt;\&gt;\</code\> (single-threaded) for \<code class="inline-code"\>AccountInfo.lamports\</code\> and data — enforcing runtime borrow checks for mutable access within the same transaction scope.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Explain the difference between Box, Rc, and Arc. When would you encounter each in Solana code?\</span\>  
+        \<span class="qa-diff diff-mid"\>Mid\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<ul\>  
+          \<li\>\<strong\>\<code class="inline-code"\>Box\&lt;T\&gt;\</code\>\</strong\> — heap allocation with single ownership. Used for trait objects (\<code class="inline-code"\>Box\&lt;dyn Error\&gt;\</code\>) and recursive data structures.\</li\>  
+          \<li\>\<strong\>\<code class="inline-code"\>Rc\&lt;T\&gt;\</code\>\</strong\> — reference-counted heap pointer for multiple ownership in \<em\>single-threaded\</em\> contexts. Used inside \<code class="inline-code"\>AccountInfo\</code\> to share lamport/data access within one instruction.\</li\>  
+          \<li\>\<strong\>\<code class="inline-code"\>Arc\&lt;T\&gt;\</code\>\</strong\> — atomic reference count — thread-safe version of Rc. Used in Solana's validator/runtime internals (multi-threaded) but rarely in on-chain program code.\</li\>  
+        \</ul\>  
+        \<p\>In on-chain Solana programs, you'll see \<code class="inline-code"\>Rc\&lt;RefCell\&lt;\&amp;'info mut u64\&gt;\&gt;\</code\> for lamports — it allows the runtime to share mutable access to a single lamport balance across multiple \<code class="inline-code"\>AccountInfo\</code\> references within the same transaction, with runtime borrow checking via \<code class="inline-code"\>RefCell\</code\>.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How does Rust's error handling with Result and Option compare to exception-based languages? How do you use it in Solana programs?\</span\>  
+        \<span class="qa-diff diff-core"\>Core\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Rust has no exceptions. Errors are values returned as \<code class="inline-code"\>Result\&lt;T, E\&gt;\</code\> (recoverable) or \<code class="inline-code"\>Option\&lt;T\&gt;\</code\> (present/absent). This forces explicit error handling at every call site.\</p\>  
+        \<pre\>// Native Solana program error handling  
+use solana\_program::program\_error::ProgramError;
+
+fn process(amount: u64, balance: u64) \-\> Result\<u64, ProgramError\> {  
+    balance.checked\_sub(amount)  
+        .ok\_or(ProgramError::InsufficientFunds)  
+}
+
+// In Anchor — custom errors with \#\[error\_code\]  
+\#\[error\_code\]  
+pub enum MyError {  
+    \#\[msg("Amount exceeds available balance")\]  
+    InsufficientFunds,  
+    \#\[msg("Authority mismatch")\]  
+    UnauthorizedAccess,  
+}
+
+// Returning errors in an instruction handler  
+pub fn withdraw(ctx: Context\<Withdraw\>, amount: u64) \-\> Result\<()\> {  
+    require\!(  
+        ctx.accounts.vault.balance \>= amount,  
+        MyError::InsufficientFunds  
+    );  
+    // ...  
+    Ok(())  
+}\</pre\>  
+        \<p\>Key advantages: errors are \<strong\>visible in function signatures\</strong\>, cannot be silently ignored (unlike exceptions), and the \<code class="inline-code"\>?\</code\> operator provides ergonomic early-return propagation.\</p\>  
+      \</div\>  
+    \</div\>
+
+  \</div\>
+
+  \<div class="divider"\>\</div\>
+
+  \<\!-- 1C: Anchor \--\>  
+  \<div class="badge badge-blue mt-24"\>⚓ Category C\</div\>  
+  \<h3 style="font-size:1.2rem; margin-bottom:16px;"\>Anchor Framework\</h3\>  
+  \<div class="qa-grid"\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What does Anchor abstract over raw Solana program development? What does it add beyond convenience?\</span\>  
+        \<span class="qa-diff diff-core"\>Core\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Anchor automates several security-critical and boilerplate tasks:\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Account discriminators\</strong\> — 8-byte SHA256 hash prepended to every account. Prevents type confusion attacks where an attacker passes a different account type.\</li\>  
+          \<li\>\<strong\>Automatic deserialization\</strong\> — \<code class="inline-code"\>\#\[account\]\</code\> macro generates \<code class="inline-code"\>try\_deserialize\</code\> with discriminator checks.\</li\>  
+          \<li\>\<strong\>Constraint macros\</strong\> — \<code class="inline-code"\>has\_one\</code\>, \<code class="inline-code"\>constraint\</code\>, \<code class="inline-code"\>owner\</code\>, \<code class="inline-code"\>signer\</code\> declarations in the \<code class="inline-code"\>Accounts\</code\> struct generate inline validation code.\</li\>  
+          \<li\>\<strong\>IDL generation\</strong\> — produces a JSON Interface Definition Language file enabling TypeScript client generation.\</li\>  
+          \<li\>\<strong\>CPI helpers\</strong\> — auto-generates type-safe CPI modules.\</li\>  
+        \</ul\>  
+        \<pre\>// Without Anchor: manual checks required  
+if ctx.accounts.authority.key \!= \&expected\_key {  
+    return Err(ProgramError::InvalidAccountData);  
+}  
+if \!ctx.accounts.authority.is\_signer {  
+    return Err(ProgramError::MissingRequiredSignature);  
+}
+
+// With Anchor: declarative, compile-time verified  
+\#\[derive(Accounts)\]  
+pub struct UpdateConfig\<'info\> {  
+    \#\[account(  
+        mut,  
+        has\_one \= authority,  // checks config.authority \== authority.key  
+    )\]  
+    pub config: Account\<'info, Config\>,  
+    pub authority: Signer\<'info\>,  // ensures authority is a signer  
+}\</pre\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How do you perform a Cross-Program Invocation (CPI) in Anchor? What are the security considerations?\</span\>  
+        \<span class="qa-diff diff-senior"\>Senior\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>CPIs let your program call instructions on other programs. There are two types: \<code class="inline-code"\>invoke()\</code\> (no PDA signing) and \<code class="inline-code"\>invoke\_signed()\</code\> (PDA signs as signer).\</p\>  
+        \<pre\>// CPI to SPL Token Transfer via Anchor's CPI module  
+use anchor\_spl::token::{self, Transfer, Token};
+
+pub fn transfer\_tokens(ctx: Context\<TransferCtx\>, amount: u64) \-\> Result\<()\> {  
+    let cpi\_accounts \= Transfer {  
+        from: ctx.accounts.from\_ata.to\_account\_info(),  
+        to:   ctx.accounts.to\_ata.to\_account\_info(),  
+        authority: ctx.accounts.authority.to\_account\_info(),  
+    };  
+    let cpi\_program \= ctx.accounts.token\_program.to\_account\_info();  
+    token::transfer(CpiContext::new(cpi\_program, cpi\_accounts), amount)?;  
+    Ok(())  
+}
+
+// CPI signed by a PDA  
+let seeds \= &\[b"vault", &\[bump\]\];  
+let signer\_seeds \= &\[\&seeds\[..\]\];  
+token::transfer(  
+    CpiContext::new\_with\_signer(cpi\_program, cpi\_accounts, signer\_seeds),  
+    amount,  
+)?;\</pre\>  
+        \<p\>\<strong\>Security considerations:\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Arbitrary CPI\</strong\> — never call a user-supplied program ID without validating it matches an expected, trusted address. An attacker can pass in a malicious program.\</li\>  
+          \<li\>\<strong\>Account reloading\</strong\> — Anchor does \<em\>not\</em\> auto-reload deserialized accounts after a CPI. If the CPI modifies account state, you must reload: \<code class="inline-code"\>ctx.accounts.vault.reload()?;\</code\>\</li\>  
+          \<li\>\<strong\>Reentrancy\</strong\> — while Solana prevents direct reentrancy, CPI call chains can create unexpected state. Ensure no state invariants are broken across CPI boundaries.\</li\>  
+        \</ul\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What is an account discriminator in Anchor and how does it prevent account substitution attacks?\</span\>  
+        \<span class="qa-diff diff-senior"\>Senior\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>When Anchor serializes an account, it prepends an 8-byte discriminator that is the first 8 bytes of \<code class="inline-code"\>sha256("account:\&lt;TypeName\&gt;")\</code\>. On deserialization, Anchor checks this discriminator before deserializing the data.\</p\>  
+        \<p\>\<strong\>Why it matters:\</strong\> Without discriminators, an attacker could create an account with the same layout as your \<code class="inline-code"\>UserAccount\</code\> but initialize it as a \<code class="inline-code"\>VaultAccount\</code\> — and pass it to an instruction expecting a \<code class="inline-code"\>UserAccount\</code\>. The discriminator check prevents this type confusion at no runtime cost beyond 8 bytes of storage.\</p\>  
+        \<pre\>// Anchor generates this automatically for \#\[account\] types  
+pub const DISCRIMINATOR: \[u8; 8\] \=  
+    sha256::hash(b"account:UserAccount")\[..8\].try\_into().unwrap();
+
+// On deserialization:  
+if data\[0..8\] \!= DISCRIMINATOR {  
+    return Err(ErrorCode::AccountDiscriminatorMismatch.into());  
+}\</pre\>  
+      \</div\>  
+    \</div\>
+
+  \</div\>
+
+  \<div class="divider"\>\</div\>
+
+  \<\!-- 1D: Security \--\>  
+  \<div class="badge badge-red mt-24"\>🔒 Category D\</div\>  
+  \<h3 style="font-size:1.2rem; margin-bottom:16px;"\>Smart Contract Security\</h3\>  
+  \<div class="qa-grid"\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What are the most critical security vulnerabilities specific to Solana programs? Give examples of each.\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>The top Solana-specific vulnerabilities (sourced from Neodyme, OtterSec, and Helius security research):\</p\>  
+        \<div class="card-grid" style="margin-top:12px;"\>  
+          \<div class="info-card"\>  
+            \<h4\>1. Missing Ownership Checks\</h4\>  
+            \<p\>Failing to verify that an account is owned by the expected program. An attacker creates a malicious account with the right data layout but owned by their program.\</p\>  
+            \<pre style="font-size:.75rem; margin-top:8px;"\>// Vulnerable — no owner check  
+let data: \&MyAccount \= ...;
+
+// Safe — Anchor enforces this automatically  
+// Account\<'info, MyAccount\> checks owner \= program\_id\</pre\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>2. Missing Signer Check\</h4\>  
+            \<p\>Not verifying that a critical authority account actually signed the transaction. Allows anyone to call privileged instructions.\</p\>  
+            \<pre style="font-size:.75rem; margin-top:8px;"\>// Must verify signer:  
+require\!(authority.is\_signer, MyError::Unauthorized);  
+// In Anchor, use Signer\<'info\> type\</pre\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>3. Arbitrary CPI (Account Confusion)\</h4\>  
+            \<p\>Passing a user-supplied program ID to CPI without validating it. Attacker injects a malicious program that modifies unexpected state.\</p\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>4. Integer Overflow/Underflow\</h4\>  
+            \<p\>Using raw arithmetic (+, \-, \*, /) that wraps silently. Use \<code class="inline-code"\>checked\_add()\</code\>, \<code class="inline-code"\>checked\_mul()\</code\>, or Rust's overflow-panicking debug mode.\</p\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>5. Account Reloading After CPI\</h4\>  
+            \<p\>Using stale deserialized data after a CPI that modified an account. Anchor's deserialized state is a snapshot — it must be reloaded explicitly.\</p\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>6. PDA Seed Collisions\</h4\>  
+            \<p\>Using non-unique seeds that allow an attacker to predict and pre-initialize an account you'll trust, or cause two different logical accounts to map to the same PDA.\</p\>  
+          \</div\>  
+        \</div\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Explain the "account resurrection" attack. How do you prevent it when closing accounts?\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>When you "close" an account by transferring all its lamports to another account, the account data may still persist for the duration of the transaction. An attacker can use a subsequent instruction in the same transaction to re-deposit lamports and \<em\>resurrect\</em\> the account — causing the program to process it again as if it were valid.\</p\>  
+        \<p\>\<strong\>Prevention:\</strong\> Always zero the account data when closing:\</p\>  
+        \<pre\>// Manual closure  
+let dest\_account \= ctx.accounts.destination.to\_account\_info();  
+let source \= ctx.accounts.data\_account.to\_account\_info();
+
+// Transfer lamports  
+\*\*dest\_account.lamports.borrow\_mut() \+= \*\*source.lamports.borrow();  
+\*\*source.lamports.borrow\_mut() \= 0;
+
+// CRITICAL: Zero the data  
+source.data.borrow\_mut().fill(0);
+
+// In Anchor — use close \= destination constraint:  
+\#\[account(mut, close \= destination)\]  
+pub data\_account: Account\<'info, MyData\>,  
+// Anchor handles zeroing AND discriminator invalidation\</pre\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How do you design a program that should be upgradeable but also trustless? What tradeoffs exist?\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Solana programs are upgradeable by default via a \<strong\>BPFLoader upgrade authority\</strong\>. Tradeoffs:\</p\>  
+        \<div class="table-wrap"\>  
+          \<table\>  
+            \<tr\>\<th\>Approach\</th\>\<th\>Trust Model\</th\>\<th\>Tradeoff\</th\>\</tr\>  
+            \<tr\>\<td\>Single upgrade authority (EOA)\</td\>\<td\>Trust team\</td\>\<td\>Full upgradeability, centralized risk\</td\>\</tr\>  
+            \<tr\>\<td\>Multisig upgrade authority (Squads)\</td\>\<td\>M-of-N signers\</td\>\<td\>Decentralized, but signers can collude\</td\>\</tr\>  
+            \<tr\>\<td\>Timelock \+ multisig\</td\>\<td\>Community reaction window\</td\>\<td\>Users can exit before changes take effect\</td\>\</tr\>  
+            \<tr\>\<td\>Upgrade authority \= None\</td\>\<td\>Fully immutable\</td\>\<td\>Cannot fix bugs; requires full migration\</td\>\</tr\>  
+          \</table\>  
+        \</div\>  
+        \<p\>\<strong\>Best practice for senior devs:\</strong\> Launch with a multisig (e.g., Squads Protocol v4) with a 3/5 or 4/7 key structure, add a 48–72hr timelock for sensitive operations, and publish a clear upgrade policy. Publish all upgrades with changelogs verified by an audit firm.\</p\>  
+      \</div\>  
+    \</div\>
+
+  \</div\>
+
+  \<div class="divider"\>\</div\>
+
+  \<\!-- 1E: System Design \--\>  
+  \<div class="badge badge-blue mt-24"\>🏗️ Category E\</div\>  
+  \<h3 style="font-size:1.2rem; margin-bottom:16px;"\>System Design & Architecture\</h3\>  
+  \<div class="qa-grid"\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Design a decentralized exchange (AMM) on Solana. Walk through the account structure and key trade-offs.\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>\<strong\>Core accounts for a constant-product AMM (x \* y \= k):\</strong\>\</p\>  
+        \<pre\>// Pool state account (PDA: seeds \= \[token\_a\_mint, token\_b\_mint\])  
+pub struct Pool {  
+    pub token\_a\_mint: Pubkey,  
+    pub token\_b\_mint: Pubkey,  
+    pub token\_a\_vault: Pubkey,   // PDA-owned ATA for token A  
+    pub token\_b\_vault: Pubkey,   // PDA-owned ATA for token B  
+    pub lp\_mint: Pubkey,         // LP token mint (PDA-owned)  
+    pub fee\_rate\_bps: u16,       // e.g., 30 \= 0.3%  
+    pub bump: u8,  
+}\</pre\>  
+        \<p\>\<strong\>Key design decisions for Solana:\</strong\>\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Concentrated liquidity\</strong\> (Orca Whirlpools model) — tick-based positions reduce impermanent loss but increase account complexity and state size per tick.\</li\>  
+          \<li\>\<strong\>Hot account mitigation\</strong\> — a single pool account is a Sealevel bottleneck. Protocols like Meteora use dynamic liquidity bins to spread writes. Consider whether your swap instruction writes to 1 or N accounts.\</li\>  
+          \<li\>\<strong\>Oracle integration\</strong\> — use Pyth Network for price feeds with staleness and confidence checks. Never rely solely on on-chain price as an oracle (manipulation risk).\</li\>  
+          \<li\>\<strong\>Fee collection\</strong\> — store fees inline in the pool or in separate PDA fee accounts. Consider protocol fee vs LP fee split.\</li\>  
+        \</ul\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How would you approach off-chain indexing and data availability for a DeFi protocol on Solana?\</span\>  
+        \<span class="qa-diff diff-senior"\>Senior\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Solana's high throughput means on-chain data accumulates rapidly. A production DeFi protocol needs robust off-chain infra:\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Geyser Plugins\</strong\> — validators stream account updates and transaction logs directly via a gRPC/plugin interface. Used for building real-time dashboards, MEV bots, and event-driven systems.\</li\>  
+          \<li\>\<strong\>Helius / Triton / QuickNode\</strong\> — managed RPC \+ Geyser endpoints. Use webhooks for account change notifications without polling.\</li\>  
+          \<li\>\<strong\>The Graph (Solana subgraphs)\</strong\> — added Solana Firehose support in 2024\. Define a subgraph schema, map transaction logs, and query via GraphQL.\</li\>  
+          \<li\>\<strong\>Yellowstone Geyser gRPC\</strong\> — direct streaming from validators for ultra-low latency (used by searchers and MEV bots).\</li\>  
+          \<li\>\<strong\>Custom indexers (Rust \+ PostgreSQL/ClickHouse)\</strong\> — listen to websocket logs, decode instruction data using your program's IDL, store in a time-series-friendly DB.\</li\>  
+        \</ul\>  
+        \<p\>For \<strong\>event emission\</strong\>, use Anchor's \<code class="inline-code"\>emit\!()\</code\> macro which logs a CPI to a self-calling program, producing a structured log that indexers can decode from transaction logs.\</p\>  
+      \</div\>  
+    \</div\>
+
+  \</div\>  
+\</section\>
+
+\<\!-- ═══ SECTION 2: INTERVIEW PROCESS ═══ \--\>  
+\<section class="section" id="s2"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>02\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>Interview Process Breakdown\</h2\>  
+      \<p class="section-desc"\>How top Web3 companies and DeFi protocols structure their Solana dev hiring.\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="process-steps"\>  
+    \<div class="process-step"\>  
+      \<div class="step-circle"\>📋\</div\>  
+      \<div class="step-label"\>Screening\</div\>  
+      \<div class="step-desc"\>30–45 min\<br\>Recruiter \+ basics\</div\>  
+    \</div\>  
+    \<div class="process-step"\>  
+      \<div class="step-circle"\>💻\</div\>  
+      \<div class="step-label"\>Take-Home\</div\>  
+      \<div class="step-desc"\>3–5 days\<br\>Build a mini program\</div\>  
+    \</div\>  
+    \<div class="process-step"\>  
+      \<div class="step-circle"\>🔬\</div\>  
+      \<div class="step-label"\>Technical\</div\>  
+      \<div class="step-desc"\>60–90 min\<br\>Live coding \+ review\</div\>  
+    \</div\>  
+    \<div class="process-step"\>  
+      \<div class="step-circle"\>🏗️\</div\>  
+      \<div class="step-label"\>System Design\</div\>  
+      \<div class="step-desc"\>60 min\<br\>Protocol architecture\</div\>  
+    \</div\>  
+    \<div class="process-step"\>  
+      \<div class="step-circle"\>🤝\</div\>  
+      \<div class="step-label"\>Culture / Behavioral\</div\>  
+      \<div class="step-desc"\>45 min\<br\>Team \+ values fit\</div\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="card-grid mt-16"\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>🔍\</div\>  
+      \<h4\>Round 1 — Technical Screening\</h4\>  
+      \<ul\>  
+        \<li\>Solana account model questions\</li\>  
+        \<li\>Rust ownership/lifetime basics\</li\>  
+        \<li\>Simple PDA derivation problem\</li\>  
+        \<li\>High-level DeFi/Solana ecosystem knowledge\</li\>  
+        \<li\>Discuss past Solana projects\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>📝\</div\>  
+      \<h4\>Round 2 — Take-Home (Most Common)\</h4\>  
+      \<ul\>  
+        \<li\>Write a staking program with PDAs\</li\>  
+        \<li\>Implement a simple token vault/escrow\</li\>  
+        \<li\>Fix security bugs in a provided Anchor program\</li\>  
+        \<li\>Build a DAO voting contract\</li\>  
+        \<li\>Graded on security, code quality, tests, README\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>💡\</div\>  
+      \<h4\>Round 3 — Live Technical \+ Code Review\</h4\>  
+      \<ul\>  
+        \<li\>Walk through your take-home code\</li\>  
+        \<li\>Identify vulnerabilities in a provided snippet\</li\>  
+        \<li\>Compute budget optimization exercise\</li\>  
+        \<li\>CPI design challenge\</li\>  
+        \<li\>Debug a failing test live\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>🏛️\</div\>  
+      \<h4\>Round 4 — System Design\</h4\>  
+      \<ul\>  
+        \<li\>Design a lending protocol (like Solend/marginfi)\</li\>  
+        \<li\>Design an NFT marketplace\</li\>  
+        \<li\>Off-chain indexing architecture\</li\>  
+        \<li\>Upgrade strategy for a live protocol\</li\>  
+        \<li\>MEV protection mechanisms\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>👥\</div\>  
+      \<h4\>Round 5 — Behavioral / Culture\</h4\>  
+      \<ul\>  
+        \<li\>How do you handle a critical bug in production?\</li\>  
+        \<li\>Tell me about a time you disagreed with a technical decision\</li\>  
+        \<li\>How do you stay current in the Solana ecosystem?\</li\>  
+        \<li\>Open source contribution examples\</li\>  
+        \<li\>Token/equity questions, mission alignment\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>⚠️\</div\>  
+      \<h4\>What Differentiates Senior Candidates\</h4\>  
+      \<ul\>  
+        \<li\>Deep security knowledge — can spot CPI & PDA bugs\</li\>  
+        \<li\>Compute budget awareness in every design decision\</li\>  
+        \<li\>Experience auditing or being audited\</li\>  
+        \<li\>Understanding of MEV and its protocol impact\</li\>  
+        \<li\>GitHub with live deployed Solana programs\</li\>  
+      \</ul\>  
+    \</div\>  
+  \</div\>  
+\</section\>
+
+\<\!-- ═══ SECTION 3: CODING CHALLENGES ═══ \--\>  
+\<section class="section" id="s3"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>03\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>Coding & Practical Challenges\</h2\>  
+      \<p class="section-desc"\>Real problems asked in Solana developer interviews with detailed solutions.\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="highlight-card"\>  
+    \<h4\>🧩 Challenge 1: Implement a Token Escrow / Atomic Swap\</h4\>  
+    \<p\>One of the most common take-home problems. The solution must use PDAs for the escrow vault, handle failure cases, and be idempotent.\</p\>  
+  \</div\>  
+\<pre\>// Anchor Escrow Program — Senior-Level Implementation  
+use anchor\_lang::prelude::\*;  
+use anchor\_spl::token::{self, Token, TokenAccount, Transfer};
+
+declare\_id\!("Esc1...yourprogramid");
+
+\#\[program\]  
+pub mod escrow {  
+    use super::\*;
+
+    // Initializer locks Token A into escrow, expecting Token B  
+    pub fn initialize(  
+        ctx: Context\<Initialize\>,  
+        initializer\_amount: u64,  
+        taker\_amount: u64,  
+    ) \-\> Result\<()\> {  
+        let escrow \= \&mut ctx.accounts.escrow\_state;  
+        escrow.initializer       \= \*ctx.accounts.initializer.key;  
+        escrow.initializer\_deposit\_token\_account \=  
+            \*ctx.accounts.initializer\_deposit\_token\_account.to\_account\_info().key;  
+        escrow.initializer\_receive\_token\_account \=  
+            \*ctx.accounts.initializer\_receive\_token\_account.to\_account\_info().key;  
+        escrow.initializer\_amount \= initializer\_amount;  
+        escrow.taker\_amount       \= taker\_amount;  
+        escrow.bump               \= ctx.bumps.escrow\_state;
+
+        // Transfer from initializer ATA \-\> escrow vault (PDA)  
+        token::transfer(  
+            CpiContext::new(  
+                ctx.accounts.token\_program.to\_account\_info(),  
+                Transfer {  
+                    from: ctx.accounts.initializer\_deposit\_token\_account  
+                              .to\_account\_info(),  
+                    to:   ctx.accounts.vault.to\_account\_info(),  
+                    authority: ctx.accounts.initializer.to\_account\_info(),  
+                },  
+            ),  
+            initializer\_amount,  
+        )?;  
+        Ok(())  
+    }
+
+    // Taker provides Token B, receives Token A from vault  
+    pub fn exchange(ctx: Context\<Exchange\>) \-\> Result\<()\> {  
+        let escrow \= \&ctx.accounts.escrow\_state;  
+        let seeds \= &\[  
+            b"escrow".as\_ref(),  
+            escrow.initializer.as\_ref(),  
+            &\[escrow.bump\],  
+        \];  
+        let signer\_seeds \= &\[\&seeds\[..\]\];
+
+        // Taker sends Token B to initializer  
+        token::transfer(  
+            CpiContext::new(  
+                ctx.accounts.token\_program.to\_account\_info(),  
+                Transfer {  
+                    from:      ctx.accounts.taker\_deposit\_token\_account.to\_account\_info(),  
+                    to:        ctx.accounts.initializer\_receive\_token\_account.to\_account\_info(),  
+                    authority: ctx.accounts.taker.to\_account\_info(),  
+                },  
+            ),  
+            escrow.taker\_amount,  
+        )?;
+
+        // PDA-signed transfer: vault Token A \-\> taker  
+        token::transfer(  
+            CpiContext::new\_with\_signer(  
+                ctx.accounts.token\_program.to\_account\_info(),  
+                Transfer {  
+                    from:      ctx.accounts.vault.to\_account\_info(),  
+                    to:        ctx.accounts.taker\_receive\_token\_account.to\_account\_info(),  
+                    authority: ctx.accounts.escrow\_state.to\_account\_info(),  
+                },  
+                signer\_seeds,  
+            ),  
+            escrow.initializer\_amount,  
+        )?;  
+        Ok(())  
+    }  
+}
+
+\#\[account\]  
+pub struct EscrowState {  
+    pub initializer: Pubkey,  
+    pub initializer\_deposit\_token\_account: Pubkey,  
+    pub initializer\_receive\_token\_account: Pubkey,  
+    pub initializer\_amount: u64,  
+    pub taker\_amount: u64,  
+    pub bump: u8,  
+}  
+impl EscrowState {  
+    pub const LEN: usize \= 32 \+ 32 \+ 32 \+ 8 \+ 8 \+ 1;  
+}\</pre\>
+
+  \<div class="highlight-card mt-24"\>  
+    \<h4\>🧩 Challenge 2: Compute Budget Optimization\</h4\>  
+    \<p\>Senior candidates are expected to understand and optimize compute unit (CU) consumption. The default limit is 200,000 CUs per transaction; complex programs may need up to 1.4M CUs.\</p\>  
+  \</div\>  
+\<pre\>// ANTI-PATTERN: Unnecessary heap allocations \+ redundant CPI calls  
+pub fn bad\_transfer(ctx: Context\<Transfer\>, amounts: Vec\<u64\>) \-\> Result\<()\> {  
+    for amount in amounts.iter() {  // iterating with potential heap alloc  
+        token::transfer(ctx.clone(), \*amount)?;  // CPI per iteration  
+    }  
+    Ok(())  
+}
+
+// OPTIMIZED: Request more CUs upfront, batch logic, reduce CPIs  
+// In TypeScript client:  
+const modifyComputeUnits \= ComputeBudgetProgram.setComputeUnitLimit({  
+    units: 400\_000,  
+});  
+const addPriorityFee \= ComputeBudgetProgram.setComputeUnitPrice({  
+    microLamports: 10\_000, // priority fee in microlamports per CU  
+});
+
+// On-chain: Use checked\_add instead of raw \+  
+// Avoid string formatting in hot paths  
+// Prefer stack allocations over Vec\<\> where possible  
+// Use zero\_copy accounts for large data structs
+
+// Zero-copy account — eliminates deserialization overhead  
+\#\[account(zero\_copy)\]  // stored as raw bytes, no copy on read  
+pub struct LargeOrderBook {  
+    pub bids: \[Order; 512\],  
+    pub asks: \[Order; 512\],  
+}
+
+// Log CU consumption during development  
+use solana\_program::log::sol\_log\_compute\_units;  
+sol\_log\_compute\_units(); // logs remaining CUs — dev only\</pre\>
+
+  \<div class="highlight-card mt-24"\>  
+    \<h4\>🧩 Challenge 3: Debug This Vulnerable Program\</h4\>  
+    \<p\>A classic interview exercise: find all security bugs in the following snippet.\</p\>  
+  \</div\>  
+\<pre\>// VULNERABLE CODE — find the bugs\!  
+pub fn withdraw(ctx: Context\<Withdraw\>, amount: u64) \-\> Result\<()\> {  
+    let vault \= \&mut ctx.accounts.vault;  
+    // Bug 1: No authority check — anyone can call this  
+    // Bug 2: No signer check on \`authority\`  
+      
+    // Bug 3: Arithmetic — could underflow to a huge number  
+    vault.balance \= vault.balance \- amount;  
+      
+    // Bug 4: No check that authority.key \== vault.authority  
+    token::transfer(  
+        CpiContext::new(/\*...\*/), // Bug 5: passing user-provided program\_id  
+        amount,  
+    )?;  
+    Ok(())  
+}
+
+// ─── CORRECTED VERSION ───────────────────────────────────────  
+pub fn withdraw(ctx: Context\<Withdraw\>, amount: u64) \-\> Result\<()\> {  
+    // Anchor constraints handle: signer check, has\_one authority, owner check  
+    let vault \= \&mut ctx.accounts.vault;  
+      
+    vault.balance \= vault.balance  
+        .checked\_sub(amount)  
+        .ok\_or(ErrorCode::InsufficientFunds)?;  // overflow-safe  
+      
+    // Use Anchor CPI module — program ID is hardcoded, not user-supplied  
+    token::transfer(  
+        CpiContext::new\_with\_signer(  
+            ctx.accounts.token\_program.to\_account\_info(), // verified SPL Token  
+            Transfer { /\*...\*/ },  
+            &\[&\[b"vault", &\[ctx.accounts.vault.bump\]\]\],  
+        ),  
+        amount,  
+    )  
+}
+
+\#\[derive(Accounts)\]  
+pub struct Withdraw\<'info\> {  
+    \#\[account(mut, has\_one \= authority)\]  // enforces authority ownership  
+    pub vault: Account\<'info, Vault\>,  
+    pub authority: Signer\<'info\>,  // must be a signer  
+    pub token\_program: Program\<'info, Token\>,  // must be the SPL Token Program  
+}\</pre\>  
+\</section\>
+
+\<\!-- ═══ SECTION 4: PROJECT PORTFOLIO ═══ \--\>  
+\<section class="section" id="s4"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>04\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>Project Portfolio Expectations\</h2\>  
+      \<p class="section-desc"\>What senior candidates are expected to have built — and what makes a project truly "senior-level."\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="card-grid"\>  
+    \<div class="info-card" style="border-color: rgba(20,241,149,.2);"\>  
+      \<div class="info-card-icon"\>🏦\</div\>  
+      \<h4\>DeFi Protocol (Required)\</h4\>  
+      \<ul\>  
+        \<li\>AMM or CLOB DEX with liquidity provision\</li\>  
+        \<li\>Lending/borrowing protocol with liquidations\</li\>  
+        \<li\>Yield aggregator / auto-compounding vault\</li\>  
+        \<li\>Perpetuals or options protocol\</li\>  
+        \<li\>\<strong\>Senior signal:\</strong\> price oracle integration (Pyth), liquidation engine, interest rate model\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card" style="border-color: rgba(153,69,255,.2);"\>  
+      \<div class="info-card-icon"\>🗳️\</div\>  
+      \<h4\>DAO / Governance (Strong Signal)\</h4\>  
+      \<ul\>  
+        \<li\>On-chain proposal \+ voting system\</li\>  
+        \<li\>Token-weighted or quadratic voting\</li\>  
+        \<li\>Timelock execution of governance actions\</li\>  
+        \<li\>Integration with Realms (SPL Governance)\</li\>  
+        \<li\>\<strong\>Senior signal:\</strong\> multi-sig execution, veto mechanisms, delegation\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card" style="border-color: rgba(0,194,255,.2);"\>  
+      \<div class="info-card-icon"\>🎨\</div\>  
+      \<h4\>NFT Infrastructure\</h4\>  
+      \<ul\>  
+        \<li\>Compressed NFT minting at scale (Bubblegum)\</li\>  
+        \<li\>Royalty enforcement system\</li\>  
+        \<li\>Dynamic NFT metadata update (on-chain)\</li\>  
+        \<li\>NFT marketplace with escrow\</li\>  
+        \<li\>\<strong\>Senior signal:\</strong\> Metaplex Core integration, concurrent Merkle tree management\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card" style="border-color: rgba(252,211,77,.2);"\>  
+      \<div class="info-card-icon"\>🔐\</div\>  
+      \<h4\>Security-Focused Contributions\</h4\>  
+      \<ul\>  
+        \<li\>Smart contract audit reports (even self-audits)\</li\>  
+        \<li\>Contributions to security research / CTFs\</li\>  
+        \<li\>Open-source security tooling (fuzzer, scanner)\</li\>  
+        \<li\>Bug bounty findings\</li\>  
+        \<li\>\<strong\>Senior signal:\</strong\> documented Neodyme/OtterSec CTF participation\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card" style="border-color: rgba(251,113,133,.2);"\>  
+      \<div class="info-card-icon"\>⚡\</div\>  
+      \<h4\>Performance / Infrastructure\</h4\>  
+      \<ul\>  
+        \<li\>Custom Geyser plugin or indexer\</li\>  
+        \<li\>MEV bot (arbitrage, liquidation)\</li\>  
+        \<li\>High-frequency trading infrastructure\</li\>  
+        \<li\>Custom RPC middleware\</li\>  
+        \<li\>\<strong\>Senior signal:\</strong\> latency benchmarking, Jito bundle integration\</li\>  
+      \</ul\>  
+    \</div\>  
+    \<div class="info-card"\>  
+      \<div class="info-card-icon"\>🌉\</div\>  
+      \<h4\>Cross-Chain / Interoperability\</h4\>  
+      \<ul\>  
+        \<li\>Wormhole message passing integration\</li\>  
+        \<li\>Bridge receiver program\</li\>  
+        \<li\>Cross-chain token unlock/lock\</li\>  
+        \<li\>\<strong\>Senior signal:\</strong\> VAA verification, guardian set handling\</li\>  
+      \</ul\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="highlight-card mt-24"\>  
+    \<h4\>📌 What Makes a Project "Senior-Level"?\</h4\>  
+    \<ul\>  
+      \<li\>\<strong\>Production deployment\</strong\> — mainnet-beta, real TVL, or real users. Devnet projects signal junior experience.\</li\>  
+      \<li\>\<strong\>Security-first design\</strong\> — documented threat model, access control matrix, and ideally an external audit or peer review.\</li\>  
+      \<li\>\<strong\>Compute efficiency\</strong\> — evidence of CU profiling, zero-copy usage where appropriate, and transaction size optimization.\</li\>  
+      \<li\>\<strong\>Comprehensive test suite\</strong\> — unit tests, integration tests, fuzz tests (Trident), and attack vector tests.\</li\>  
+      \<li\>\<strong\>Upgrade path documented\</strong\> — clear upgrade authority plan, migration scripts, and backwards-compatibility strategy.\</li\>  
+      \<li\>\<strong\>Well-documented IDL\</strong\> — usable by other developers without asking the author.\</li\>  
+    \</ul\>  
+  \</div\>  
+\</section\>
+
+\<\!-- ═══ SECTION 5: ADVANCED TOPICS ═══ \--\>  
+\<section class="section" id="s5"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>05\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>Advanced Topics & Trends\</h2\>  
+      \<p class="section-desc"\>Cutting-edge concepts being asked at senior-level interviews in 2025.\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="qa-grid"\>  
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How does MEV work on Solana? How does it differ from Ethereum MEV?\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>\<strong\>MEV (Maximal Extractable Value)\</strong\> on Solana differs architecturally from Ethereum:\</p\>  
+        \<div class="table-wrap"\>  
+          \<table\>  
+            \<tr\>\<th\>Dimension\</th\>\<th\>Ethereum\</th\>\<th\>Solana\</th\>\</tr\>  
+            \<tr\>\<td\>Mempool\</td\>\<td\>Public mempool (visible to all)\</td\>\<td\>No traditional mempool; Gulf Stream forwards to leaders\</td\>\</tr\>  
+            \<tr\>\<td\>Ordering mechanism\</td\>\<td\>Gas price auction\</td\>\<td\>Jito bundle tips \+ priority fees\</td\>\</tr\>  
+            \<tr\>\<td\>Primary MEV infra\</td\>\<td\>Flashbots MEV-Boost\</td\>\<td\>Jito-Solana validator client\</td\>\</tr\>  
+            \<tr\>\<td\>Sandwich attacks\</td\>\<td\>Common via mempool watching\</td\>\<td\>Harder but possible via Jito mempool (suspended March 2024)\</td\>\</tr\>  
+            \<tr\>\<td\>Arbitrage\</td\>\<td\>Flash loans \+ atomic swaps\</td\>\<td\>Atomic multi-hop swaps in single tx, no flash loans needed\</td\>\</tr\>  
+          \</table\>  
+        \</div\>  
+        \<p\>\<strong\>Jito's role:\</strong\> By late 2024, over 90% of Solana's stake ran the Jito-Solana validator client. Jito's bundle system allows searchers to submit bundles of ordered transactions with tips, and validators select highest-tip bundles during block assembly. In Q1 2025, Jito bundles accounted for over 22% of total validator rewards.\</p\>  
+        \<p\>\<strong\>As a smart contract developer:\</strong\> Design protocols to be MEV-resistant. Use TWAPs (time-weighted average prices) for oracle prices, add slippage limits with on-chain checks, and consider commit-reveal schemes for sensitive operations.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What is Firedancer, and how does it change the validator ecosystem?\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>\<strong\>Firedancer\</strong\> is Jump Crypto's independent Solana validator client implementation, written in C from scratch (separate from the Rust-based Agave/Solana Labs client). Key implications:\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Client diversity\</strong\> — previously, a bug in the single Solana Labs client could halt the entire network. Firedancer provides a second independent implementation, dramatically improving resilience.\</li\>  
+          \<li\>\<strong\>Performance\</strong\> — Frankendancer (partial Firedancer integration) demonstrated 1 million TPS in testnet conditions in September 2024, compared to \~4,000 TPS in production today.\</li\>  
+          \<li\>\<strong\>Separate consensus path\</strong\> — the network can continue if one client has a bug, as long as 67% of stake runs a non-buggy client.\</li\>  
+        \</ul\>  
+        \<p\>For program developers, Firedancer is largely transparent — programs run identically. However, it signals that the network's throughput ceiling is much higher than current production performance, so future programs should be designed for high-volume environments.\</p\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>What are Token Extensions (Token-2022)? Name 3 extensions and their use cases.\</span\>  
+        \<span class="qa-diff diff-senior"\>Senior\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Token Extensions (the SPL Token-2022 program) is a superset of the original SPL Token program, enabling mint and account-level extensions:\</p\>  
+        \<div class="card-grid"\>  
+          \<div class="info-card"\>  
+            \<h4\>Confidential Transfers\</h4\>  
+            \<p\>Uses ElGamal encryption to hide transfer amounts on-chain while preserving verifiability. Ideal for institutional DeFi and compliant private payments without full ZK overhead.\</p\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>Transfer Hooks\</h4\>  
+            \<p\>Invoke a custom program on every token transfer. Enables royalty enforcement, compliance blocklists, loyalty point tracking, and NFT-specific logic without wrapping tokens.\</p\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>Interest-Bearing Tokens\</h4\>  
+            \<p\>Accrue interest automatically without rebasing — the token's "amount" at display time is scaled by a stored interest rate. Perfect for yield-bearing stablecoin designs (like cTokens).\</p\>  
+          \</div\>  
+          \<div class="info-card"\>  
+            \<h4\>Permanent Delegate\</h4\>  
+            \<p\>Grants a persistent authority the ability to transfer or burn any token from any holder's account — used for protocol-level compliance, subscription services, or stream payments.\</p\>  
+          \</div\>  
+        \</div\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>How is ZK being integrated into the Solana ecosystem? What is zkCompression?\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>ZK (Zero-Knowledge) is being integrated at several layers:\</p\>  
+        \<ul\>  
+          \<li\>\<strong\>Confidential Transfers\</strong\> (Token-2022) — uses ZK proofs (specifically ElGamal \+ sigma protocols) to prove transfer validity without revealing amounts.\</li\>  
+          \<li\>\<strong\>Light Protocol / zkCompression\</strong\> — compresses account state into a Merkle tree stored as on-chain transaction data (much cheaper than full account rent). Programs can operate on compressed accounts, proving state via ZK Merkle proofs. This dramatically reduces state storage costs — e.g., compressed NFTs (Bubblegum) reduced minting costs from \~0.01 SOL to \~0.000005 SOL per NFT.\</li\>  
+          \<li\>\<strong\>Solana's SVM \+ ZK rollups\</strong\> — exploratory projects aim to build ZK-rollup layers that post proofs to Solana mainnet, using it as a DA (data availability) layer.\</li\>  
+          \<li\>\<strong\>Groth16/PLONK verifiers\</strong\> — on-chain ZK verifier programs using Solana's precompiles for curve operations (bn254 curve operations).\</li\>  
+        \</ul\>  
+      \</div\>  
+    \</div\>
+
+    \<div class="qa-card"\>  
+      \<div class="qa-q" onclick="toggle(this)"\>  
+        \<span class="qa-q-text"\>Explain Solana's Turbine block propagation protocol.\</span\>  
+        \<span class="qa-diff diff-expert"\>Expert\</span\>  
+        \<span class="qa-toggle"\>▾\</span\>  
+      \</div\>  
+      \<div class="qa-a"\>  
+        \<p\>Turbine solves the block propagation bandwidth problem — broadcasting a full block to thousands of validators would require enormous bandwidth from the leader. Instead:\</p\>  
+        \<ul\>  
+          \<li\>The leader breaks blocks into small \<strong\>shreds\</strong\> (\~1,280 bytes) using Reed-Solomon erasure coding.\</li\>  
+          \<li\>Shreds are organized in a \<strong\>binary tree of validators\</strong\> — each validator propagates shreds to its children in the tree.\</li\>  
+          \<li\>Each validator only receives and forwards a portion of the block, then uses erasure codes to reconstruct the full block from partial data.\</li\>  
+          \<li\>This reduces per-node bandwidth requirements from O(N) to O(√N), enabling the network to scale to thousands of validators without a bottleneck at the leader.\</li\>  
+        \</ul\>  
+        \<p\>For developers, Turbine explains why large transactions and accounts with lots of data cost more — they require more shreds to propagate. The 1,232-byte transaction size limit directly ties to Turbine's shred size architecture.\</p\>  
+      \</div\>  
+    \</div\>
+
+  \</div\>  
+\</section\>
+
+\<\!-- ═══ SECTION 6: ROADMAP ═══ \--\>  
+\<section class="section" id="s6"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>06\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>4-Week Study Roadmap\</h2\>  
+      \<p class="section-desc"\>A prioritized, structured plan to prepare for a senior Solana role efficiently.\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="roadmap"\>  
+    \<div class="roadmap-week"\>  
+      \<div class="week-num"\>W1\</div\>  
+      \<div class="week-content"\>  
+        \<div class="week-title"\>Foundation Solidification\</div\>  
+        \<div class="week-sub"\>Goal: Eliminate any knowledge gaps in Solana core concepts and Rust for blockchain.\</div\>  
+        \<div class="week-tasks"\>  
+          \<span class="task-tag"\>✅ Read Solana Docs: Account Model, Transactions, Runtime\</span\>  
+          \<span class="task-tag"\>✅ Sealevel whitepaper \+ Turbine \+ Gulf Stream\</span\>  
+          \<span class="task-tag"\>✅ Rust Book Chapters 4 (ownership), 10 (generics/traits/lifetimes), 16 (concurrency)\</span\>  
+          \<span class="task-tag"\>✅ Anchor Book: full walkthrough \+ counter program\</span\>  
+          \<span class="task-tag"\>✅ Build: Deploy a simple voting contract on devnet\</span\>  
+          \<span class="task-tag"\>✅ Study: Helius blog — Hitchhiker's Guide to Solana Security\</span\>  
+        \</div\>  
+      \</div\>  
+    \</div\>  
+    \<div class="roadmap-week"\>  
+      \<div class="week-num"\>W2\</div\>  
+      \<div class="week-content"\>  
+        \<div class="week-title"\>Security Deep Dive \+ Anchor Mastery\</div\>  
+        \<div class="week-sub"\>Goal: Be able to audit and write secure programs confidently.\</div\>  
+        \<div class="week-tasks"\>  
+          \<span class="task-tag"\>✅ Complete Neodyme Solana Security Workshop CTF\</span\>  
+          \<span class="task-tag"\>✅ Read all Anchor security exploits documentation\</span\>  
+          \<span class="task-tag"\>✅ Study 3 major Solana hacks: Wormhole, Solend, Slope\</span\>  
+          \<span class="task-tag"\>✅ Build: Full Anchor escrow program with tests\</span\>  
+          \<span class="task-tag"\>✅ Setup Trident fuzzer on your escrow\</span\>  
+          \<span class="task-tag"\>✅ Practice: Spot vulnerabilities in sannykim/solsec repo examples\</span\>  
+          \<span class="task-tag"\>✅ Token Extensions: confidential transfers \+ transfer hooks\</span\>  
+        \</div\>  
+      \</div\>  
+    \</div\>  
+    \<div class="roadmap-week"\>  
+      \<div class="week-num"\>W3\</div\>  
+      \<div class="week-content"\>  
+        \<div class="week-title"\>DeFi Architecture \+ Performance\</div\>  
+        \<div class="week-sub"\>Goal: Be able to design and discuss production DeFi systems confidently.\</div\>  
+        \<div class="week-tasks"\>  
+          \<span class="task-tag"\>✅ Study Raydium/Orca/Phoenix source code architecture\</span\>  
+          \<span class="task-tag"\>✅ Understand Pyth Network oracle integration patterns\</span\>  
+          \<span class="task-tag"\>✅ Compute Unit profiling: measure CUs on your programs\</span\>  
+          \<span class="task-tag"\>✅ Zero-copy accounts: implement a large orderbook\</span\>  
+          \<span class="task-tag"\>✅ Build: AMM or lending protocol MVP\</span\>  
+          \<span class="task-tag"\>✅ MEV: Study Jito bundles, read sanj.dev MEV deep dive\</span\>  
+          \<span class="task-tag"\>✅ Indexing: Set up a Geyser plugin or Helius webhook\</span\>  
+        \</div\>  
+      \</div\>  
+    \</div\>  
+    \<div class="roadmap-week"\>  
+      \<div class="week-num"\>W4\</div\>  
+      \<div class="week-content"\>  
+        \<div class="week-title"\>Interview Prep \+ Portfolio Polish\</div\>  
+        \<div class="week-sub"\>Goal: Sharpen communication, finalize GitHub, practice live coding.\</div\>  
+        \<div class="week-tasks"\>  
+          \<span class="task-tag"\>✅ Mock interviews: system design (AMM, DAO, lending)\</span\>  
+          \<span class="task-tag"\>✅ Write up 2-3 projects as README case studies\</span\>  
+          \<span class="task-tag"\>✅ Add comprehensive tests to portfolio programs\</span\>  
+          \<span class="task-tag"\>✅ Behavioral STAR stories: 5 key scenarios prepared\</span\>  
+          \<span class="task-tag"\>✅ Advanced: Firedancer, zkCompression, Token-2022\</span\>  
+          \<span class="task-tag"\>✅ Practice live debugging exercises from Section 3\</span\>  
+          \<span class="task-tag"\>✅ Review all Q\&A in this guide — fill remaining gaps\</span\>  
+        \</div\>  
+      \</div\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="highlight-card mt-24"\>  
+    \<h4\>⚡ Priority Order (by Interview Frequency)\</h4\>  
+    \<p\>Based on research across blogs, forums, and community data, here's what comes up most:\</p\>  
+    \<ul\>  
+      \<li\>\<strong\>\#1 — PDA design & security\</strong\> (asked in virtually every technical round)\</li\>  
+      \<li\>\<strong\>\#2 — Account model vs Ethereum\</strong\> (screening question, must be crisp)\</li\>  
+      \<li\>\<strong\>\#3 — CPI security (arbitrary CPI, account reloading)\</strong\>\</li\>  
+      \<li\>\<strong\>\#4 — Compute budget optimization\</strong\>\</li\>  
+      \<li\>\<strong\>\#5 — Sealevel parallel execution model\</strong\>\</li\>  
+      \<li\>\<strong\>\#6 — Anchor discriminators & constraints\</strong\>\</li\>  
+      \<li\>\<strong\>\#7 — MEV awareness on Solana\</strong\>\</li\>  
+    \</ul\>  
+  \</div\>  
+\</section\>
+
+\<\!-- ═══ SECTION 7: RESOURCES ═══ \--\>  
+\<section class="section" id="s7"\>  
+  \<div class="section-header"\>  
+    \<span class="section-num"\>07\</span\>  
+    \<div\>  
+      \<h2 class="section-title"\>Curated Resources\</h2\>  
+      \<p class="section-desc"\>The definitive list — sorted by type and quality signal.\</p\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="badge badge-green"\>📚 Official Documentation\</div\>  
+  \<div class="resource-list mt-16" style="margin-bottom: 28px;"\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>📖\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Solana Developer Documentation — docs.solana.com\</h5\>  
+        \<p\>The authoritative reference. Start with: Account Model, Transaction Anatomy, Programs, Runtime. The "Core Concepts" section is interview gold.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>⚓\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Anchor Documentation — anchor-lang.com/docs\</h5\>  
+        \<p\>Complete reference for all Anchor macros, constraints, and CPI patterns. The "Security Exploits" section is required reading.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>🔑\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>SPL Token 2022 Docs — spl.solana.com/token-2022\</h5\>  
+        \<p\>Covers all Token Extensions. Senior interviewers increasingly ask about confidential transfers and transfer hooks.\</p\>  
+      \</div\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="badge badge-red"\>🔒 Security Resources\</div\>  
+  \<div class="resource-list mt-16" style="margin-bottom: 28px;"\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>🛡️\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Helius: A Hitchhiker's Guide to Solana Program Security — helius.dev/blog\</h5\>  
+        \<p\>The single best security overview for Solana. Covers CPI security, account reloading, PDA attacks, and authority management with real code examples.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>🔬\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Neodyme Solana Security Workshop — github.com/neodyme-labs\</h5\>  
+        \<p\>Hands-on CTF-style exercises. Solving all levels demonstrates the security depth expected at senior level. Widely known in the Solana security community.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>📋\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>sannykim/solsec — github.com/sannykim/solsec\</h5\>  
+        \<p\>Curated collection of security resources, real exploit analyses, audit reports, and writeups. Reference this when studying hacks like Wormhole and Solend.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>🔍\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Neodyme: Solana Common Pitfalls — neodyme.io/blog\</h5\>  
+        \<p\>The canonical resource on Solana-specific vulnerabilities. Covers missing owner checks, integer overflow, PDA bugs, and more with exploitable examples.\</p\>  
+      \</div\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="badge badge-purple"\>🎥 Videos & Courses\</div\>  
+  \<div class="resource-list mt-16" style="margin-bottom: 28px;"\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-vid"\>🎬\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Solana Bootcamp — YouTube (Solana Foundation)\</h5\>  
+        \<p\>Multi-day deep dives into program development. The "Advanced" sessions cover CPI, PDAs, and performance. Essential for visual learners.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-course"\>📚\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Solana Development Course — soldev.app\</h5\>  
+        \<p\>Structured course from beginner to advanced Anchor development. Good for solidifying fundamentals and understanding the account model deeply.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-vid"\>🎬\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Helius YouTube Channel\</h5\>  
+        \<p\>High-quality deep dives on transactions, compression, Geyser, and MEV. The "Solana Transaction Anatomy" video is particularly useful for interviews.\</p\>  
+      \</div\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="badge badge-blue"\>📦 Open-Source Repos to Study\</div\>  
+  \<div class="resource-list mt-16" style="margin-bottom: 28px;"\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>🐦\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Raydium Protocol — github.com/raydium-io\</h5\>  
+        \<p\>Study the AMM architecture, concentrated liquidity design, and how Raydium handles the compute-intensive swap path. Used by most interviewers as a reference when asking AMM design questions.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>🌊\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Orca Whirlpools — github.com/orca-so/whirlpools\</h5\>  
+        \<p\>Best-in-class CLMM (concentrated liquidity) implementation on Solana. Study tick management, position accounts, and the fee collection mechanism.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>🏛️\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Squads Protocol v4 — github.com/squads-protocol\</h5\>  
+        \<p\>Production multisig / smart account implementation. Study as a reference for authority management, transaction batching, and upgrade patterns.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>🗳️\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>SPL Governance (Realms) — github.com/solana-labs/solana-program-library\</h5\>  
+        \<p\>Reference implementation for on-chain governance. Study the proposal lifecycle, voter weight records, and timelock execution for DAO interview questions.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-repo"\>🌳\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Metaplex Bubblegum — github.com/metaplex-foundation/mpl-bubblegum\</h5\>  
+        \<p\>Compressed NFT implementation. Essential for understanding concurrent Merkle trees, zkCompression, and the state compression architecture that's increasingly asked about at senior levels.\</p\>  
+      \</div\>  
+    \</div\>  
+  \</div\>
+
+  \<div class="badge badge-green"\>📰 Key Blogs & Articles\</div\>  
+  \<div class="resource-list mt-16"\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>✍️\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Helius Blog — helius.dev/blog\</h5\>  
+        \<p\>The best technical blog in the Solana ecosystem. Articles on Sealevel, Turbine, MEV, security, Geyser, and RPC optimization. Bookmark and read weekly.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>✍️\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>Anatoly Yakovenko's Sealevel Post — solana.com/news\</h5\>  
+        \<p\>The original Sealevel blog post by Solana's founder. Required reading for understanding how parallel execution works at a fundamental level.\</p\>  
+      \</div\>  
+    \</div\>  
+    \<div class="resource-item"\>  
+      \<div class="resource-icon res-type-doc"\>✍️\</div\>  
+      \<div class="resource-info"\>  
+        \<h5\>sanj.dev — MEV & Jito Deep Dive\</h5\>  
+        \<p\>Best non-academic explanation of MEV on Solana, Jito's Block Assembly Marketplace, and the economics of searcher competition. Essential for the MEV questions.\</p\>  
+      \</div\>  
+    \</div\>  
+  \</div\>  
+\</section\>
+
+\</div\>\<\!-- /container \--\>
+
+\<footer\>  
+  \<p\>Senior Solana Smart Contract Developer Interview Guide · Research-backed · 2025 Edition\</p\>  
+  \<p style="margin-top:8px; color: \#2a3d6b;"\>Covers: Solana Fundamentals · Rust · Anchor · Security · System Design · MEV · Sealevel · ZK Integration\</p\>  
+\</footer\>
+
+\<script\>  
+function toggle(el) {  
+  const card \= el.closest('.qa-card');  
+  card.classList.toggle('open');  
+}  
+\</script\>  
+\</body\>  
+\</html\>  
